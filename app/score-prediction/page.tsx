@@ -5,6 +5,20 @@ import { fetchScorePrediction } from "@/utils/api/score";
 import { useRef, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
+export interface ScorePredictionResponse {
+  data: {
+    category: string;
+    score: number;
+    resume_skills: string[];
+    jd_skills: string[];
+    matched_skills: string[];
+    missing_skills: string[];
+    Tfidf_Similarity: number;
+    Bert_Similarity: number;
+  };
+}
+
+
 
 export default function Page() {
   const [resume, setResume] = useState<File | null>(null);
@@ -12,7 +26,7 @@ export default function Page() {
   const [jdFile, setJdFile] = useState<File | null>(null);
 
 
-  const [responseData, setResponseData] = useState<any>(null);
+  const [responseData, setResponseData] = useState<ScorePredictionResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState(false);
   const [jdText, setJdText] = useState(false);
@@ -132,20 +146,20 @@ export default function Page() {
                   <div className="flex flex-col gap-2">
                     <span>Resume skills: </span>
                     <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
-                      {responseData.data.resume_skills.map((skill: any) => skill).join(", ")}
+                      {responseData.data.resume_skills.join(", ")}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span>JD skills: </span>
                     <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
-                      {responseData.data.jd_skills.map((skill: any) => skill).join(", ")}
+                      {responseData.data.jd_skills.join(", ")}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="">Matched skills:</span>
                     <span className="bg-gray-50 p-2 rounded text-sm border border-gray-200">
                       {responseData.data.matched_skills?.length > 0
-                        ? responseData.data.matched_skills.map((skill: any) => skill).join(", ")
+                        ? responseData.data.matched_skills.join(", ")
                         : "None"}
                     </span>
                   </div>
@@ -153,7 +167,7 @@ export default function Page() {
                     <span className="">Missing skills:</span>
                     <span className="bg-gray-50 p-2 text-sm rounded border border-gray-200">
                       {responseData.data.missing_skills?.length > 0
-                        ? responseData.data.missing_skills.map((skill: any) => skill).join(", ")
+                        ? responseData.data.missing_skills.join(", ")
                         : "None"}
                     </span>
                   </div>

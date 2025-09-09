@@ -2,7 +2,24 @@
 
 import Nav from "@/components/Nav";
 import { fetchRankResumes } from "@/utils/api/ranking";
+import { NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { useRef, useState } from "react";
+
+
+interface ResumeResult {
+  resume_name: string;
+  category: string;
+  score: number;
+  matched_skills: string[];
+  missing_skills: string[];
+  Tfidf_Similarity: number;
+  Bert_Similarity: number;
+}
+
+interface RankingResponse {
+  results: ResumeResult[];
+}
 
 
 export default function Page() {
@@ -11,7 +28,7 @@ export default function Page() {
   const [jdFile, setJdFile] = useState<File | null>(null);
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
 
-  const [responseData, setResponseData] = useState<any>(null);
+  const [responseData, setResponseData] = useState<RankingResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [jdText, setJdText] = useState(false);
 
@@ -114,7 +131,7 @@ export default function Page() {
             </div>
 
             {/* Resume Rows */}
-            {responseData.results.map((res: any, index: number) => {
+            {responseData?.results.map((res, index) => {
               const isExpanded = expandedRow === index;
 
               return (

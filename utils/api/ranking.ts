@@ -1,10 +1,24 @@
 import apiClient from "./apiClient";
 
+interface ResumeResult {
+  resume_name: string;
+  category: string;
+  score: number;
+  matched_skills: string[];
+  missing_skills: string[];
+  Tfidf_Similarity: number;
+  Bert_Similarity: number;
+}
+
+interface RankingResponse {
+  results: ResumeResult[];
+}
+
 export async function fetchRankResumes(
   resumes: File[],
   jdFile?: File,
   jdTextInput?: string
-) {
+): Promise<RankingResponse> {
   const formData = new FormData();
 
   resumes.forEach((file) => formData.append("resumes", file));

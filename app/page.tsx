@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-2 text-center">
       <h1 className="text-3xl">Resume score</h1>
-      <p>Don't you wanna know about your resume...</p>
+      <p>Don&apos;t you wanna know about your resume...</p>
       <Link href={"/score-prediction"} onClick={handleClick} className="bg-black text-white px-9 py-1.5 rounded text-sm">
         {loading ? "Loading..." : "Get Started"}
       </Link>
