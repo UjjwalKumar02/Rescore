@@ -2,24 +2,9 @@
 
 import Nav from "@/components/Nav";
 import { fetchRankResumes } from "@/utils/api/ranking";
-import { NextApiResponse } from "next";
-import { NextResponse } from "next/server";
 import { useRef, useState } from "react";
+import type { RankingResponse } from "@/types/ranking";
 
-
-interface ResumeResult {
-  resume_name: string;
-  category: string;
-  score: number;
-  matched_skills: string[];
-  missing_skills: string[];
-  Tfidf_Similarity: number;
-  Bert_Similarity: number;
-}
-
-interface RankingResponse {
-  results: ResumeResult[];
-}
 
 
 export default function Page() {
@@ -139,7 +124,7 @@ export default function Page() {
                   {/* Row header */}
                   <div
                     onClick={() => toggleRow(index)}
-                    className="flex justify-between items-center lg:px-11 px-9 py-5 cursor-pointer hover:bg-gray-50"
+                    className="flex justify-between lg:items-center lg:px-11 px-9 py-5 cursor-pointer hover:bg-gray-50 lg:flex-row flex-col gap-3"
                   >
                     <div className="flex gap-4 items-center">
                       <p>{index + 1}.</p>
@@ -179,8 +164,12 @@ export default function Page() {
                         <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Tfidf_Similarity}</p>
                       </div>
                       <div className="space-y-1">
-                        <p className="font-medium">BERT Similarity:</p>
-                        <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Bert_Similarity}</p>
+                        <p className="font-medium">Jaccard Similarity:</p>
+                        <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Jaccard_Similarity}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-medium">Length ratio:</p>
+                        <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Length_Ratio}</p>
                       </div>
                     </div>
                   )}

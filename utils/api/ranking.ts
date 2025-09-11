@@ -1,18 +1,7 @@
 import apiClient from "./apiClient";
+import type { RankingResponse } from "@/types/ranking";
 
-interface ResumeResult {
-  resume_name: string;
-  category: string;
-  score: number;
-  matched_skills: string[];
-  missing_skills: string[];
-  Tfidf_Similarity: number;
-  Bert_Similarity: number;
-}
 
-interface RankingResponse {
-  results: ResumeResult[];
-}
 
 export async function fetchRankResumes(
   resumes: File[],

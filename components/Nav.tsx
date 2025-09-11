@@ -11,7 +11,7 @@ export default function Nav() {
       <div className="flex items-center lg:gap-10 gap-4 text-sm font-medium">
         <Link href="/score-prediction" className="hover:text-blue-600">Score</Link>
         <Link href="/rank-resumes" className="hover:text-blue-600 ">Rank</Link>
-        <a href="" className="hover:text-blue-600"><LuGithub size={20} /></a>
+        <a href="https://github.com/UjjwalKumar02/Resume-score" className="hover:text-blue-600"><LuGithub size={20} /></a>
       </div>
     </div>
   );

@@ -14,7 +14,8 @@ export interface ScorePredictionResponse {
     matched_skills: string[];
     missing_skills: string[];
     Tfidf_Similarity: number;
-    Bert_Similarity: number;
+    Jaccard_Similarity: number;
+    Length_Ratio: number;
   };
 }
 
@@ -178,9 +179,15 @@ export default function Page() {
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="">Bert similarity: </span>
+                    <span className="">Jaccard similarity: </span>
                     <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
-                      {responseData.data.Bert_Similarity}
+                      {responseData.data.Jaccard_Similarity}
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="">Length ratio: </span>
+                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                      {responseData.data.Length_Ratio}
                     </span>
                   </div>
                 </div>
