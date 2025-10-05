@@ -2,7 +2,7 @@
 
 Resume score is a tool that evaluates how well resumes match with job descriptions.
 
-![Image](public/app_screenshot.jpeg)
+![Image](public/app_screenshot4.png)
 
 ## Features
 

@@ -53,7 +53,7 @@ export default function Page() {
       <div className="flex flex-col items-center justify-center gap-8 mx-auto lg:w-[44%] w-[85%] mt-30">
 
         {/* Input Box */}
-        <div className="flex flex-col gap-5 w-full border border-gray-200 px-10 py-10 shadow">
+        <div className="flex flex-col gap-5 w-full border border-gray-300 px-11 py-9 shadow-xl rounded-lg">
           {/* Multiple resumes */}
           <div className="flex flex-wrap justify-between gap-1">
             <label htmlFor="resume">Resumes</label>
@@ -63,7 +63,7 @@ export default function Page() {
               multiple
               accept=".pdf, .doc, .docx"
               onChange={(e) => setResumes(Array.from(e.target.files || []))}
-              className="border border-gray-300 rounded lg:w-70 w-55 p-1 text-sm bg-gray-100"
+              className="border border-gray-300 rounded-lg lg:w-70 w-55 p-1 text-sm bg-blue-50"
             />
           </div>
 
@@ -77,7 +77,7 @@ export default function Page() {
                 value={jdInputText}
                 onChange={(e) => setJdInputText(e.target.value)}
                 placeholder="Enter Job description..."
-                className="border border-gray-300 lg:w-70 w-55 rounded p-1 text-sm bg-gray-100 placeholder:text-black"
+                className="border border-gray-300 lg:w-70 w-55 rounded-lg p-1 text-sm bg-blue-50 placeholder:text-black"
               />
             </div>
           ) : (
@@ -88,22 +88,22 @@ export default function Page() {
                 type="file"
                 accept=".pdf, .doc, .docx"
                 onChange={(e) => setJdFile(e.target.files?.[0] || null)}
-                className="border border-gray-300 lg:w-70 w-55 rounded p-1 text-sm bg-gray-100"
+                className="border border-gray-300 lg:w-70 w-55 rounded-lg p-1 text-sm bg-blue-50"
               />
             </div>
           )}
 
           <button
             onClick={handleSubmit}
-            className="mt-3 w-fit bg-black text-white rounded px-9 py-1.5 text-sm"
+            className="mt-2 w-fit bg-black text-white px-10 py-1 text-sm rounded-lg font-medium cursor-pointer hover:bg-gray-800"
           >
-            {loading ? "Processing..." : "Process"}
+            {loading ? "Processing..." : "Get Rankings"}
           </button>
         </div>
 
         {/* Toggle JD input type */}
-        <button onClick={() => setJdText(!jdText)} className="hover:text-gray-500 text-sm">
-          Enter Job description in {jdText ? "File" : "Text"} format &gt;
+        <button onClick={() => setJdText(!jdText)} className="hover:text-blue-300 text-blue-500">
+          Enter Job description in {jdText ? "File" : "Text"} format -&gt;
         </button>
 
         {/* Results */}

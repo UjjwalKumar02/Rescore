@@ -4,8 +4,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from 'next/image';
-import img from "../public/app_screenshot.jpeg"
+import img from "../public/app_screenshot3.png"
 import { RiOpenSourceLine } from "react-icons/ri";
+import { LuCopyright } from "react-icons/lu";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -15,37 +16,63 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-2 text-center">
-      <div className="w-full fixed top-0 flex justify-between px-12 py-5 items-center">
+    <div className="bg-white min-h-screen flex flex-col items-center justify- gap-6 text-center relative ">
+
+      <div className="w-full flex justify-between md:px-10 px-7 py-5 items-center sticky top-0 bg-white border border-gray-300 shadow-xs">
         <p className="text-2xl font-medium font-sans">Rescore</p>
         <div>
-          <a href="https://github.com/UjjwalKumar02/Resume-score" className="bg-[#4d1cff] text-white px-6 py-1.5 rounded-lg text-sm">Github</a>
+          <a href="https://github.com/UjjwalKumar02/Resume-score" className="bg-black px-6 py-1.5 rounded-xl text-sm font-medium text-gray-100">Github</a>
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-5 px-2 text-center mt-27 mb-8">
+      <div className="w-[88%] flex justify-center items-center px-20 gap-8 mt-18">
+
+        
+
+      <div className="flex flex-col items-start justify-center md:gap-6 gap-7 px-2 text-  mb-8 w-[42%]">
         <div className="border border-gray-500 py-1.5 px-5 rounded-full text-sm flex items-center gap-1 ">
           <RiOpenSourceLine size={20} color="blue" />
           Open source
         </div>
-        <div className="space-y-3">
-          <p className="text-4xl leading-[1.4] font-medium ">
-            Real-Time Resume
-            <br />
-            Evaluation based on Job Descriptions
+        <div className="space-y-4 text-left">
+          <p className="md:text-4xl text-2xl leading-[1.44] font-medium">
+            Real-time 
+            
+
+            Resume evaluation with 
+            
+             
+            
+            Job Description
           </p>
-          <p>
-            Predicts candidate fit score and ranking
+          <p className="md:text-md text-sm">
+            Predicts resume fit score and ranking
           </p>
         </div>
-        <Link href={"/score-prediction"} onClick={handleClick} className="border border-gray-300 bg-[#4d1cff] text-white px-8 py-1.5 rounded-lg hover:bg-[#3414b4]">
+        <Link href={"/score-prediction"} onClick={handleClick} className="bg-black text-gray-100 px-9 py-1 rounded-xl hover:bg-gray-800 font-medium">
           {loading ? "Loading..." : "Get Started >"}
         </Link>
       </div>
 
-      <div className="border-t-9 border-x-9 rounded-t-3xl p-2">
-        <Image src={img} alt="image" height={100} width={960} className="rounded-3xl" />
+      <div className="border border-gray-300 rounded-xl shadow-lg transition-transform duration-300 transform hover:scale-120 hover:z-10 mt-3">
+        <Image
+          src={img}
+          alt="image"
+          height={100}
+          width={700}
+          className="rounded-xl w-192"
+        />
       </div>
+
+      </div>
+
+
+      {/* <div className="w-full bg-gray-900 text-gray-200 py-1 flex items-center justify-center gap-1">
+        <LuCopyright size={18}/>
+        <p>
+          Copyright by Ujjwal 2025
+        </p>
+      </div> */}
     </div>
   );
 }

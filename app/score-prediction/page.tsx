@@ -65,9 +65,9 @@ export default function Page() {
   return (
     <div className="h-screen ">
       <Nav />
-      <div className="flex flex-col items-center justify-center gap-8  mx-auto lg:w-[44%] w-[85%] mt-30">
+      <div className="flex flex-col items-center justify-center gap-8 mx-auto lg:w-[44%] w-[85%] mt-30">
 
-        <div className="flex flex-col gap-5 w-full border border-gray-200 px-10 py-10 shadow justify-center">
+        <div className="flex flex-col gap-5 w-full border border-gray-300 px-10 py-8 shadow-xl rounded-lg justify-center">
           <div className="flex flex-wrap justify-between gap-1">
             <label htmlFor="resume">Resume</label>
             <input
@@ -75,7 +75,7 @@ export default function Page() {
               type="file"
               accept=".pdf, .doc, .docx"
               onChange={(e) => setResume(e.target.files?.[0] || null)}
-              className="border border-gray-300 rounded lg:w-70 w-55 p-1 text-sm bg-gray-100"
+              className="border border-gray-300 rounded-lg lg:w-70 w-55 p-1 text-sm bg-blue-50"
             />
           </div>
 
@@ -88,7 +88,7 @@ export default function Page() {
                 value={jdInputText}
                 onChange={(e) => setJdInputText(e.target.value)}
                 placeholder="Enter Job description..."
-                className="border border-gray-300 lg:w-70 w-55 rounded p-1 text-sm bg-gray-100 placeholder:text-black"
+                className="border border-gray-300 lg:w-70 w-55 rounded-lg p-1 text-sm bg-blue-50 placeholder:text-black"
               />
             </div>
           ) : (
@@ -99,7 +99,7 @@ export default function Page() {
                 type="file"
                 accept=".pdf, .doc, .docx"
                 onChange={(e) => setJdFile(e.target.files?.[0] || null)}
-                className="border border-gray-300 lg:w-70 w-55 rounded p-1 text-sm bg-gray-100"
+                className="border border-gray-300 lg:w-70 w-55 rounded-lg p-1 text-sm bg-blue-50"
               />
             </div>
           )}
@@ -107,58 +107,57 @@ export default function Page() {
 
           <button
             onClick={handleSubmit}
-            className="mt-3 w-fit bg-black text-white rounded px-9 py-1.5 text-sm"
+            className="mt-2 w-fit bg-black text-white font-medium rounded-lg px-10 py-1 text-sm cursor-pointer hover:bg-gray-800"
           >
-            {loading ? "Loading..." : "Match"}
+            {loading ? "Processing..." : "Match"}
           </button>
         </div>
         <button
           onClick={onClickJdText}
-          className="hover:text-gray-500 text-sm"
+          className="hover:text-gray-500 text- cursor-pointer text-gray-900"
         >
-          Enter Job description in {jdText ? "File" : "Text"} format &gt;
+          Enter Job description in {jdText ? "File" : "Text"} format -&gt;
         </button>
 
 
 
         {responseData && (
           <>
-            <div className="border border-gray-200 w-full px-7 py-5 shadow">
+            <div className="border border-gray-300 w-full px-10 py-7 shadow-xl rounded-lg flex flex-col gap-10">
+
               <div className="flex gap-4 justify-between items-center flex-wrap">
                 <p className="">Result :</p>
-                <div className="flex justify-between text-sm gap-2 flex-wrap">
-                  <p className="bg-[#0969da] text-white px-6 py-1 rounded">{responseData.data.category}</p>
-                  <p className="bg-[#0969da] text-white px-6 py-1 rounded">Score: {responseData.data.score}</p>
+                <div className="flex justify-between text-sm gap-3 flex-wrap">
+                  <p className="bg-red-500 text-white px-9 py-1 rounded-lg font-medium">{responseData.data.category.charAt(0).toUpperCase() + responseData.data.category.slice(1)}</p>
+                  <p className="bg-[#0969da] text-white px-9 py-1 rounded-lg font-medium">Score: {responseData.data.score}</p>
                 </div>
               </div>
-            </div>
 
-            <div className="border border-gray-200 w-full  transition-all duration-300">
-              <button onClick={onClickLogs} className="flex justify-between px-7 py-3 shadow w-full">
-                <p>Reasoning</p>
+              <button onClick={onClickLogs} className="flex justify-between items-center gap-2 w-full text-gray-900 border-b border-gray-400 pb-4">
+                <p>Reasoning for the result</p>
                 <span
                   className="text-sm"
                 >
-                  {logs ? <FaChevronUp size={18} /> : <FaChevronDown size={18} />}
+                  {logs ? <FaChevronUp size={14} /> : <FaChevronDown size={14} />}
                 </span>
               </button>
               {logs ? (
-                <div ref={logRef} className="p-9 rounded border-t border-gray-300 space-y-9 text-gray-800">
-                  <div className="flex flex-col gap-2">
+                <div ref={logRef} className="px-6 pb-3  space-y-9 text-gray-800">
+                  {/* <div className="flex flex-col gap-2">
                     <span>Resume skills: </span>
-                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                    <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.resume_skills.join(", ")}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span>JD skills: </span>
-                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                    <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.jd_skills.join(", ")}
                     </span>
-                  </div>
+                  </div> */}
                   <div className="flex flex-col gap-2">
                     <span className="">Matched skills:</span>
-                    <span className="bg-gray-50 p-2 rounded text-sm border border-gray-200">
+                    <span className="bg-blue-50 p-2 rounded text-sm border border-gray-200">
                       {responseData.data.matched_skills?.length > 0
                         ? responseData.data.matched_skills.join(", ")
                         : "None"}
@@ -166,7 +165,7 @@ export default function Page() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="">Missing skills:</span>
-                    <span className="bg-gray-50 p-2 text-sm rounded border border-gray-200">
+                    <span className="bg-blue-50 p-2 text-sm rounded border border-gray-200">
                       {responseData.data.missing_skills?.length > 0
                         ? responseData.data.missing_skills.join(", ")
                         : "None"}
@@ -174,25 +173,29 @@ export default function Page() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <span>Tfidf similarity: </span>
-                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                    <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.Tfidf_Similarity}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="">Jaccard similarity: </span>
-                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                    <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.Jaccard_Similarity}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  {/* <div className="flex flex-col gap-2">
                     <span className="">Length ratio: </span>
-                    <span className="bg-gray-50 text-sm p-2 rounded border border-gray-200">
+                    <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.Length_Ratio}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               ) : (<></>)}
             </div>
+
+            {/* <div className="border border-gray-300 w-full transition-all duration-300 rounded-lg">
+              
+            </div> */}
           </>
         )}
 
