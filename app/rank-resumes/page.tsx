@@ -6,7 +6,6 @@ import { useRef, useState } from "react";
 import type { RankingResponse } from "@/types/ranking";
 
 
-
 export default function Page() {
   const [resumes, setResumes] = useState<File[]>([]);
   const [jdInputText, setJdInputText] = useState("");
@@ -19,12 +18,12 @@ export default function Page() {
 
   const rankingRef = useRef<HTMLDivElement | null>(null);
 
+
   const handleSubmit = async () => {
     if (resumes.length === 0 || (!jdFile && !jdInputText.trim())) {
       alert("Add at least one resume and a job description!");
       return;
     }
-
     try {
       setLoading(true);
       const data = await fetchRankResumes(resumes, jdFile || undefined, jdInputText);
@@ -47,13 +46,14 @@ export default function Page() {
     setExpandedRow((prev) => (prev === index ? null : index));
   };
 
+
   return (
     <div className="h-screen">
       <Nav />
       <div className="flex flex-col items-center justify-center gap-8 mx-auto lg:w-[44%] w-[85%] mt-30">
 
         {/* Input Box */}
-        <div className="flex flex-col gap-5 w-full border border-gray-300 px-11 py-9 shadow-xl rounded-lg">
+        <div className="flex flex-col gap-5 w-full border border-gray-300 px-10 py-8 shadow-xl rounded-lg">
           {/* Multiple resumes */}
           <div className="flex flex-wrap justify-between gap-1">
             <label htmlFor="resume">Resumes</label>
@@ -102,15 +102,18 @@ export default function Page() {
         </div>
 
         {/* Toggle JD input type */}
-        <button onClick={() => setJdText(!jdText)} className="hover:text-blue-300 text-blue-500">
+        <button
+          onClick={() => setJdText(!jdText)}
+          className="hover:text-gray-600 text-gray-900"
+        >
           Enter Job description in {jdText ? "File" : "Text"} format -&gt;
         </button>
 
         {/* Results */}
         {responseData && (
-          <div ref={rankingRef} className="w-full shadow">
+          <div ref={rankingRef} className="w-full">
             {/* Header */}
-            <div className="flex justify-between border border-gray-200 px-9 py-7 text-lg">
+            <div className="flex justify-between border border-gray-300 px-9 py-7 text-lg rounded-t-lg shadow-xs">
               <p>Ranking</p>
               <p>Score</p>
             </div>
@@ -118,23 +121,26 @@ export default function Page() {
             {/* Resume Rows */}
             {responseData?.results.map((res, index) => {
               const isExpanded = expandedRow === index;
-
               return (
-                <div key={index} className="border border-gray-100">
+                <div key={index} className="border border-gray-300">
                   {/* Row header */}
                   <div
                     onClick={() => toggleRow(index)}
-                    className="flex justify-between lg:items-center lg:px-11 px-9 py-5 cursor-pointer hover:bg-gray-50 lg:flex-row flex-col gap-3"
+                    className="flex justify-between lg:items-center lg:px-11 px-9 py-5 cursor-pointer hover:bg-blue-50 lg:flex-row flex-col gap-3"
                   >
                     <div className="flex gap-4 items-center">
-                      <p>{index + 1}.</p>
-                      <p className="lg:text-sm text-xs max-w-70">{res.resume_name}</p>
+                      <p className="font-medium">
+                        {index + 1}.
+                      </p>
+                      <p className="lg:text-sm text-xs max-w-70">
+                        {res.resume_name}
+                      </p>
                     </div>
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className="px-4 py-1 border border-[#0969da] text-[#0969da] rounded">
-                        {res.category}
+                    <div className="flex items-center gap-4 text-sm font-medium">
+                      <span className="px-4 py-1 border border-[#0969da] text-[#0969da] rounded-lg">
+                        {res.category.charAt(0).toUpperCase() + res.category.slice(1)}
                       </span>
-                      <span className="px-3 py-1 border border-red-600 text-red-600 rounded">
+                      <span className="px-3 py-1 border border-red-600 text-red-600 rounded-lg">
                         {res.score}
                       </span>
                     </div>
@@ -142,35 +148,47 @@ export default function Page() {
 
                   {/* Expanded details */}
                   {isExpanded && (
-                    <div className="px-12 py-5 bg-gray-100 space-y-5 text-sm border-t border-gray-200">
+                    <div className="px-12 py-5 space-y-5 text-sm border-t border-gray-300 bg-gray-50">
                       <div className="space-y-1">
-                        <p className="font-medium">Matched Skills:</p>
-                        <p className="bg-gray-200 p-2 rounded border border-gray-300">
+                        <p className="font-medium">
+                          Matched Skills:
+                        </p>
+                        <p className="bg-blue-50 p-2 rounded border border-gray-300">
                           {res.matched_skills?.length > 0
                             ? res.matched_skills.join(", ")
                             : "None"}
                         </p>
                       </div>
                       <div className="space-y-1">
-                        <p className="font-medium">Missing Skills:</p>
-                        <p className="bg-gray-200 p-2 rounded border border-gray-300">
+                        <p className="font-medium">
+                          Missing Skills:
+                        </p>
+                        <p className="bg-blue-50 p-2 rounded border border-gray-300">
                           {res.missing_skills?.length > 0
                             ? res.missing_skills.join(", ")
                             : "None"}
                         </p>
                       </div>
                       <div className="space-y-1">
-                        <p className="font-medium">Tfidf Similarity:</p>
-                        <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Tfidf_Similarity}</p>
+                        <p className="font-medium">
+                          Tfidf Similarity:
+                        </p>
+                        <p className="bg-blue-50 p-2 rounded border border-gray-300">
+                          {res.Tfidf_Similarity}
+                        </p>
                       </div>
                       <div className="space-y-1">
-                        <p className="font-medium">Jaccard Similarity:</p>
-                        <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Jaccard_Similarity}</p>
+                        <p className="font-medium">
+                          Jaccard Similarity:
+                        </p>
+                        <p className="bg-blue-50 p-2 rounded border border-gray-300">
+                          {res.Jaccard_Similarity}
+                        </p>
                       </div>
-                      <div className="space-y-1">
+                      {/* <div className="space-y-1">
                         <p className="font-medium">Length ratio:</p>
                         <p className="bg-gray-200 p-2 rounded border border-gray-300">{res.Length_Ratio}</p>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </div>

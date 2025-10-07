@@ -5,6 +5,7 @@ import { fetchScorePrediction } from "@/utils/api/score";
 import { useRef, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
+
 export interface ScorePredictionResponse {
   data: {
     category: string;
@@ -20,12 +21,10 @@ export interface ScorePredictionResponse {
 }
 
 
-
 export default function Page() {
   const [resume, setResume] = useState<File | null>(null);
   const [jdInputText, setJdInputText] = useState("");
   const [jdFile, setJdFile] = useState<File | null>(null);
-
 
   const [responseData, setResponseData] = useState<ScorePredictionResponse | null>(null);
   const [loading, setLoading] = useState(false);
@@ -33,6 +32,7 @@ export default function Page() {
   const [jdText, setJdText] = useState(false);
 
   const logRef = useRef<HTMLDivElement | null>(null);
+
 
   const onClickLogs = () => {
     setLogs(!logs);
@@ -61,6 +61,7 @@ export default function Page() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="h-screen ">
@@ -126,14 +127,23 @@ export default function Page() {
             <div className="border border-gray-300 w-full px-10 py-7 shadow-xl rounded-lg flex flex-col gap-10">
 
               <div className="flex gap-4 justify-between items-center flex-wrap">
-                <p className="">Result :</p>
+                <p>
+                  Result :
+                </p>
                 <div className="flex justify-between text-sm gap-3 flex-wrap">
-                  <p className="bg-red-500 text-white px-9 py-1 rounded-lg font-medium">{responseData.data.category.charAt(0).toUpperCase() + responseData.data.category.slice(1)}</p>
-                  <p className="bg-[#0969da] text-white px-9 py-1 rounded-lg font-medium">Score: {responseData.data.score}</p>
+                  <p className="bg-red-500 text-white px-9 py-1 rounded-lg font-medium">
+                    {responseData.data.category.charAt(0).toUpperCase() + responseData.data.category.slice(1)}
+                  </p>
+                  <p className="bg-[#0969da] text-white px-9 py-1 rounded-lg font-medium">
+                    Score: {responseData.data.score}
+                  </p>
                 </div>
               </div>
 
-              <button onClick={onClickLogs} className="flex justify-between items-center gap-2 w-full text-gray-900 border-b border-gray-400 pb-4">
+              <button
+                onClick={onClickLogs}
+                className="flex justify-between items-center gap-2 w-full text-gray-900 border-b border-gray-400 pb-4"
+              >
                 <p>Reasoning for the result</p>
                 <span
                   className="text-sm"
@@ -156,7 +166,9 @@ export default function Page() {
                     </span>
                   </div> */}
                   <div className="flex flex-col gap-2">
-                    <span className="">Matched skills:</span>
+                    <span>
+                      Matched skills:
+                    </span>
                     <span className="bg-blue-50 p-2 rounded text-sm border border-gray-200">
                       {responseData.data.matched_skills?.length > 0
                         ? responseData.data.matched_skills.join(", ")
@@ -164,7 +176,9 @@ export default function Page() {
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="">Missing skills:</span>
+                    <span>
+                      Missing skills:
+                    </span>
                     <span className="bg-blue-50 p-2 text-sm rounded border border-gray-200">
                       {responseData.data.missing_skills?.length > 0
                         ? responseData.data.missing_skills.join(", ")
@@ -172,13 +186,17 @@ export default function Page() {
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span>Tfidf similarity: </span>
+                    <span>
+                      Tfidf similarity:
+                    </span>
                     <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.Tfidf_Similarity}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="">Jaccard similarity: </span>
+                    <span>
+                      Jaccard similarity:
+                    </span>
                     <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
                       {responseData.data.Jaccard_Similarity}
                     </span>
@@ -192,10 +210,6 @@ export default function Page() {
                 </div>
               ) : (<></>)}
             </div>
-
-            {/* <div className="border border-gray-300 w-full transition-all duration-300 rounded-lg">
-              
-            </div> */}
           </>
         )}
 

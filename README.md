@@ -1,6 +1,6 @@
-# Resume score
+# Rescore
 
-Resume score is a tool that evaluates how well resumes match with job descriptions.
+Rescore is a tool that evaluates resumes with job description.
 
 ![Image](public/app_screenshot4.png)
 
