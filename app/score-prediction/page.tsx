@@ -68,7 +68,7 @@ export default function Page() {
       <Nav />
       <div className="flex flex-col items-center justify-center gap-8 mx-auto lg:w-[44%] w-[85%] mt-30">
 
-        <div className="flex flex-col gap-5 w-full border border-gray-300 px-10 py-8 shadow-xl rounded-lg justify-center">
+        <div className="flex flex-col gap-5 w-full border border-gray-300 px-10 py-8 shadow-xl rounded-xl justify-center">
           <div className="flex flex-wrap justify-between gap-1">
             <label htmlFor="resume">Resume</label>
             <input
@@ -124,11 +124,11 @@ export default function Page() {
 
         {responseData && (
           <>
-            <div className="border border-gray-300 w-full px-10 py-7 shadow-xl rounded-lg flex flex-col gap-10">
+            <div className="border border-gray-300 w-full px-10 py-7 shadow-xl rounded-xl flex flex-col gap-10">
 
               <div className="flex gap-4 justify-between items-center flex-wrap">
-                <p>
-                  Result :
+                <p className="font-medium">
+                  Match Result :
                 </p>
                 <div className="flex justify-between text-sm gap-3 flex-wrap">
                   <p className="bg-red-500 text-white px-9 py-1 rounded-lg font-medium">
@@ -144,7 +144,7 @@ export default function Page() {
                 onClick={onClickLogs}
                 className="flex justify-between items-center gap-2 w-full text-gray-900 border-b border-gray-400 pb-4"
               >
-                <p>Reasoning for the result</p>
+                <p>Reason for the result</p>
                 <span
                   className="text-sm"
                 >
@@ -187,18 +187,18 @@ export default function Page() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <span>
-                      Tfidf similarity:
+                      Semantic similarity:
                     </span>
                     <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
-                      {responseData.data.Tfidf_Similarity}
+                      {responseData.data.Tfidf_Similarity * 100}%
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span>
-                      Jaccard similarity:
+                      Exact word match:
                     </span>
                     <span className="bg-blue-50 text-sm p-2 rounded border border-gray-200">
-                      {responseData.data.Jaccard_Similarity}
+                      {responseData.data.Jaccard_Similarity * 100}%
                     </span>
                   </div>
                   {/* <div className="flex flex-col gap-2">

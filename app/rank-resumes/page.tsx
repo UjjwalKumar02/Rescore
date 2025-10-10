@@ -171,18 +171,18 @@ export default function Page() {
                       </div>
                       <div className="space-y-1">
                         <p className="font-medium">
-                          Tfidf Similarity:
+                          Semantic similarity:
                         </p>
                         <p className="bg-blue-50 p-2 rounded border border-gray-300">
-                          {res.Tfidf_Similarity}
+                          {res.Tfidf_Similarity * 100}%
                         </p>
                       </div>
                       <div className="space-y-1">
                         <p className="font-medium">
-                          Jaccard Similarity:
+                          Exact word match:
                         </p>
                         <p className="bg-blue-50 p-2 rounded border border-gray-300">
-                          {res.Jaccard_Similarity}
+                          {res.Jaccard_Similarity * 100}%
                         </p>
                       </div>
                       {/* <div className="space-y-1">
